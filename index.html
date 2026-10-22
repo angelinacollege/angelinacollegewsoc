@@ -107,7 +107,11 @@
         </div>
     </section>
 <!-- Section Header -->
-           
+      <div style="text-align: center; max-width: 48rem; margin-left: auto; margin-right: auto; margin-bottom: 3rem;">
+            <div style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.375rem 0.75rem; border-radius: 9999px; background-color: rgba(255, 103, 0, 0.15); border: 1px solid rgba(255, 103, 0, 0.4); color: #ff6700; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem;">
+                <i class="fa-solid fa-trophy" style="color: #ff6700;"></i>
+                Championship Program
+            </div>
             <h2 style="font-size: 3.25rem; font-weight: 900; color: #ffffff; text-transform: uppercase; letter-spacing: -0.025em; margin: 0;">
                 2023 CHAMPIONS & LEGACY
             </h2>
@@ -237,6 +241,67 @@
                     <button onclick="goToChampionSlide(4)" class="champ-dot" style="width: 0.625rem; height: 0.625rem; border-radius: 9999px; background-color: rgba(255,255,255,0.4); border: none; cursor: pointer; transition: all 300ms;"></button>
                 </div>
             </div>
+
+
+<!-- Carousel JavaScript Engine -->
+<script>
+    let currentChampSlide = 0;
+    const totalChampSlides = 5;
+    let champTimer = null;
+
+    function updateChampionCarousel() {
+        const track = document.getElementById('champ-carousel-track');
+        if (track) {
+            track.style.transform = `translateX(-${currentChampSlide * 20}%)`;
+        }
+        
+        const dots = document.querySelectorAll('.champ-dot');
+        dots.forEach((dot, index) => {
+            if (index === currentChampSlide) {
+                dot.style.backgroundColor = '#ff6700';
+                dot.style.width = '1.25rem';
+            } else {
+                dot.style.backgroundColor = 'rgba(255, 255, 255, 0.4)';
+                dot.style.width = '0.625rem';
+            }
+        });
+    }
+
+    function nextChampionSlide() {
+        currentChampSlide = (currentChampSlide + 1) % totalChampSlides;
+        updateChampionCarousel();
+    }
+
+    function prevChampionSlide() {
+        currentChampSlide = (currentChampSlide - 1 + totalChampSlides) % totalChampSlides;
+        updateChampionCarousel();
+    }
+
+    function goToChampionSlide(index) {
+        currentChampSlide = index;
+        updateChampionCarousel();
+    }
+
+    function startChampionCarouselTimer() {
+        if (!champTimer) {
+            champTimer = setInterval(nextChampionSlide, 7500);
+        }
+    }
+
+    function pauseChampionCarousel() {
+        clearInterval(champTimer);
+        champTimer = null;
+    }
+
+    function resumeChampionCarousel() {
+        startChampionCarouselTimer();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        updateChampionCarousel();
+        startChampionCarouselTimer();
+    });
+</script>
 
     <!-- 1. CHAMPIONS SECTION -->
     <section id="champions" class="py-24 bg-ac-card border-t border-slate-800">
